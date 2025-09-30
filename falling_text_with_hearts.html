@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Falling Text with Hearts 💗</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(to bottom right, #0d0d0d, #1a001a);
+      font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+
+    .falling-text {
+      position: absolute;
+      top: -50px;
+      font-size: 22px;
+      color: #ff66cc;
+      font-weight: bold;
+      opacity: 0.95;
+      animation: fall linear forwards;
+      text-shadow: 0 0 10px #ff3399, 0 0 20px #ff66cc;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      color: #ff4da6;
+      font-size: 18px;
+      animation: float linear forwards;
+      opacity: 0.8;
+      pointer-events: none;
+      text-shadow: 0 0 5px #ff3399, 0 0 15px #ff66cc;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0.3;
+      }
+    }
+
+    @keyframes float {
+      to {
+        transform: translateY(-110vh) translateX(var(--drift));
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    // Custom texts
+    const texts = [
+      "I Love You Dippi💗",
+      "Meri Rasmalai",
+      "Meri Softie😍",
+      "Meri Jaan",
+      "Wifeyy😘",
+      "Always There For You",
+      "Will Love You For Eternity",
+      "Chilli Potato",
+      "Chattpatti Chowmein",
+      "LADAKH CHALE??!!🤭",
+      "You Will Be My Girl!",
+      "Love you Bebu🥰",
+      "Deepda",
+      "Deepa",
+      "Deepdi",
+      "Moni",
+      "Dippu",
+      "Mone",
+      "Deedar-ae-Dilkash",
+      "Jind Aali Chori😎",
+      "Mummy-Papa ki Laadli",
+      "Padhaku Neet Aspirant",
+      "Most Beautiful HASEENA",
+      "SUPERCALIFRAGILISTICEXPIALIDOCIOUS!!!"
+    ];
+
+    function createFallingText() {
+      const text = document.createElement("div");
+      text.classList.add("falling-text");
+      text.innerText = texts[Math.floor(Math.random() * texts.length)];
+
+      // random position
+      text.style.left = Math.random() * window.innerWidth + "px";
+
+      // random speed
+      const duration = 3 + Math.random() * 6; 
+      text.style.animationDuration = duration + "s";
+
+      document.body.appendChild(text);
+
+      setTimeout(() => {
+        text.remove();
+      }, duration * 1000);
+    }
+
+    // Floating hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤";
+
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.bottom = "-20px";
+
+      const duration = 5 + Math.random() * 5;
+      heart.style.animationDuration = duration + "s";
+
+      // random sideways drift
+      heart.style.setProperty("--drift", (Math.random() * 100 - 50) + "px");
+
+      heart.style.fontSize = (16 + Math.random() * 20) + "px";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, duration * 1000);
+    }
+
+    // spawn falling texts
+    setInterval(createFallingText, 500);
+
+    // spawn floating hearts
+    setInterval(createHeart, 400);
+  </script>
+</body>
+</html>
