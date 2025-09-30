@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love Page</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .falling-text {
+      position: absolute;
+      top: -50px;
+      font-size: 2em;
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0.6;
+      }
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Song -->
+  <audio autoplay loop>
+    <source src="song.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <script>
+    const words = ["Rasmalai ❤️", "Softie 💕", "Dippu 😘", "Jaan 💖", "Forever ❤️", "Meri Zindagi 💞"];
+    
+    function createFallingText() {
+      const text = document.createElement("div");
+      text.className = "falling-text";
+      text.innerText = words[Math.floor(Math.random() * words.length)];
+      text.style.left = Math.random() * 90 + "vw";
+      text.style.animationDuration = (3 + Math.random() * 5) + "s";
+      document.body.appendChild(text);
+
+      // Remove after animation
+      setTimeout(() => text.remove(), 8000);
+    }
+
+    setInterval(createFallingText, 500);
+  </script>
+</body>
+</html>
